@@ -24,18 +24,15 @@ const validationSchema = Yup.object().shape({
     endDate: Yup.date().min(Yup.ref('startDate'), 'Enddatum muss nach Startdatum liegen').required('Enddatum erforderlich'),
     travelType: Yup.string().required('Bitte wählen Sie eine Reiseart'),
     budget: Yup.array().of(Yup.number()).min(2),
+    extras: Yup.array().of(Yup.string()),
     message: Yup.string(),
+    name: Yup.string().required('Bitte geben Sie Ihren Namen an'),
+    email: Yup.string().email('Ungültige E-Mail-Adresse').required('Bitte geben Sie Ihre E-Mail-Adresse an'),
+    phone: Yup.string().required('Bitte geben Sie Ihre Telefonnummer an'),
 });
 
 export const MultiStepForm = () => {
     const [step, setStep] = useState(0);
-
-    // We can show all steps at once as per the provided HTML design (single page form), 
-    // or strictly multi-step. The design in premium_travel_planner/code.html shows ALL sections visible.
-    // However, the "Introduction" says "Reiseplanung".
-    // "Bottom Action Bar" has "Anfrage senden".
-    // So it looks like a single long scrolling form.
-    // I will implement it as a single page form as per the HTML reference, but with nice scroll/layout.
 
     return (
         <Formik
@@ -46,7 +43,10 @@ export const MultiStepForm = () => {
                 travelType: 'Pauschal',
                 budget: [1500, 3500],
                 extras: [] as string[],
-                message: ''
+                message: '',
+                name: '',
+                email: '',
+                phone: ''
             }}
             validationSchema={validationSchema}
             onSubmit={(values) => {
@@ -149,7 +149,7 @@ export const MultiStepForm = () => {
                         </div>
                     </div>
 
-                    {/* Section 4: Budget (Slider Placeholder) */}
+                    {/* Section 4: Budget */}
                     <Card className="p-6">
                         <div className="flex justify-between items-center mb-6">
                             <label className="block text-sm font-medium text-primary dark:text-gray-200 flex items-center gap-2">
@@ -160,7 +160,6 @@ export const MultiStepForm = () => {
                                 € {values.budget[0]} - € {values.budget[1]}
                             </span>
                         </div>
-                        {/* Note: Native range slider for simplicity as no heavy UI lib installed yet for multi-range */}
                         <div className="space-y-4">
                             <input
                                 type="range"
@@ -219,6 +218,44 @@ export const MultiStepForm = () => {
                             className="w-full bg-background-light dark:bg-background-dark border-0 rounded-lg py-3 px-4 text-primary dark:text-white placeholder-primary/40 dark:placeholder-gray-600 focus:ring-2 focus:ring-primary/20 text-sm leading-relaxed resize-none shadow-inner"
                             placeholder="Beschreiben Sie hier besondere Wünsche, Zimmerpräferenzen oder Aktivitäten..."
                         />
+                    </Card>
+
+                    {/* Section 7: Contact Details */}
+                    <Card className="p-6">
+                        <label className="block text-sm font-medium text-primary dark:text-gray-200 mb-4 flex items-center gap-2">
+                            <span className="material-icons-round text-primary/70 dark:text-gold text-lg">contact_mail</span>
+                            Ihre Kontaktdaten
+                        </label>
+                        <div className="space-y-4">
+                            <Input
+                                name="name"
+                                label="Name"
+                                placeholder="Max Mustermann"
+                                value={values.name}
+                                onChange={handleChange}
+                                error={touched.name && errors.name ? errors.name : undefined}
+                            />
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <Input
+                                    name="email"
+                                    type="email"
+                                    label="E-Mail"
+                                    placeholder="max@beispiel.de"
+                                    value={values.email}
+                                    onChange={handleChange}
+                                    error={touched.email && errors.email ? errors.email : undefined}
+                                />
+                                <Input
+                                    name="phone"
+                                    type="tel"
+                                    label="Telefonnummer"
+                                    placeholder="+49 170 1234567"
+                                    value={values.phone}
+                                    onChange={handleChange}
+                                    error={touched.phone && errors.phone ? errors.phone : undefined}
+                                />
+                            </div>
+                        </div>
                     </Card>
 
                     {/* Bottom Action Bar */}

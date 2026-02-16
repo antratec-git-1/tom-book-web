@@ -19,16 +19,23 @@ export const Header = () => {
     return (
         <>
             <header className={clsx(headerClass, 'transition-all duration-300')}>
-                <div className="px-6 py-4 flex justify-between items-center max-w-7xl mx-auto w-full">
-                    <Link href="/" className="flex items-center gap-2 group">
-                        <span className="material-icons-outlined text-3xl group-hover:rotate-12 transition-transform">flight_takeoff</span>
-                        <span className="font-bold text-xl tracking-tight">tom-book.de</span>
-                    </Link>
+                <div className="relative px-6 py-4 flex justify-between items-center max-w-7xl mx-auto w-full">
+                    {/* Logo - Hanging / Overlapping Style */}
+                    <div className="relative z-50">
+                        <Link href="/" className="block">
+                            <img
+                                src="/logo.png"
+                                alt="tom-book.de Logo"
+                                className="h-32 md:h-40 w-auto object-contain drop-shadow-lg"
+                                style={{ transform: 'translateY(10%)' }}
+                            />
+                        </Link>
+                    </div>
 
                     <button
                         onClick={() => setIsMenuOpen(true)}
                         className={clsx(
-                            "p-2 rounded-full transition-colors backdrop-blur-sm",
+                            "p-2 rounded-full transition-colors backdrop-blur-sm ml-auto",
                             isHome
                                 ? "hover:bg-white/10 border border-white/20"
                                 : "hover:bg-primary/5 dark:hover:bg-white/10 border border-primary/10 dark:border-white/10"

@@ -8,6 +8,13 @@ export const Footer = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
 
             <div className="relative z-10 text-center max-w-7xl mx-auto">
+                <div className="flex justify-center mb-10">
+                    <img
+                        src="/logo.png"
+                        alt="tom-book.de Logo"
+                        className="h-48 md:h-64 w-auto object-contain opacity-100 brightness-0 invert"
+                    />
+                </div>
                 <h3 className="font-display font-bold text-xl mb-2">Join the Exclusive Circle</h3>
                 <p className="text-primary/20 text-blue-100 text-sm mb-6 max-w-xs mx-auto">
                     Get curated travel tips and secret deals directly to your inbox.
