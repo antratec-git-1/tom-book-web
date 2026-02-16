@@ -38,7 +38,7 @@ export const Footer = () => {
                 </div>
 
                 <div className="flex justify-center gap-6 text-xs text-white/50 mb-4">
-                    <Link href="#" className="hover:text-white transition-colors">Impressum</Link>
+                    <Link href="/impressum" className="hover:text-white transition-colors">Impressum</Link>
                     <span>|</span>
                     <Link href="#" className="hover:text-white transition-colors">Datenschutz</Link>
                 </div>
