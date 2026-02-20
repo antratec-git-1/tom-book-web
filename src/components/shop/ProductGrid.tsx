@@ -58,19 +58,26 @@ export const ProductGrid = ({ products }: ProductGridProps) => {
                     return (
                         <Card key={product.id} className="group flex flex-col hover:shadow-md transition-shadow relative">
                             <div className="aspect-square bg-slate-50 dark:bg-slate-700 relative overflow-hidden flex items-center justify-center p-4">
-                                {product.imageUrl ? (
-                                    <img
-                                        src={product.imageUrl}
-                                        alt={product.title}
-                                        className="object-contain w-full h-full mix-blend-multiply dark:mix-blend-normal group-hover:scale-105 transition-transform duration-500"
-                                        loading="lazy"
-                                    />
-                                ) : (
-                                    <div className="flex items-center justify-center w-full h-full text-slate-300">
-                                        <span className="material-icons-round text-4xl">image_not_supported</span>
-                                    </div>
-                                )}
-                                <div className="absolute top-2 right-2 bg-white/90 dark:bg-slate-900/90 backdrop-blur text-[10px] font-bold px-2 py-1 rounded text-primary dark:text-white uppercase tracking-wider">
+                                <a
+                                    href={product.amazonUrl || '#'}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="w-full h-full flex items-center justify-center"
+                                >
+                                    {product.imageUrl ? (
+                                        <img
+                                            src={product.imageUrl}
+                                            alt={product.title}
+                                            className="object-contain w-full h-full mix-blend-multiply dark:mix-blend-normal group-hover:scale-105 transition-transform duration-500"
+                                            loading="lazy"
+                                        />
+                                    ) : (
+                                        <div className="flex items-center justify-center w-full h-full text-slate-300">
+                                            <span className="material-icons-round text-4xl">image_not_supported</span>
+                                        </div>
+                                    )}
+                                </a>
+                                <div className="absolute top-2 right-2 bg-white/90 dark:bg-slate-900/90 backdrop-blur text-[10px] font-bold px-2 py-1 rounded text-primary dark:text-white uppercase tracking-wider pointer-events-none">
                                     {product.category}
                                 </div>
                             </div>
